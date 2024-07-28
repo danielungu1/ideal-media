@@ -2,7 +2,7 @@
 
 namespace App\UI\Components\SignUpForm;
 
-use App\Facade\UserAccountFacade;
+use App\Model\Facade\UserAccountFacade;
 use App\Model\UserAccount;
 use App\UI\Components\core\BaseForm;
 use App\UI\Components\core\FormFactory;
@@ -43,7 +43,7 @@ class SignUpForm extends BaseForm
             ->setHtmlAttribute('placeholder', '@')
             ->setRequired('Zadejte email')
             ->addRule(Form::Email, 'Zadejte platný email')
-            ->addRule([$this, 'isEmailFreeToAssign'], '');
+            ->addRule([$this, 'isEmailFreeToAssign'], 'Tento email je již používán!');
 
         $form->addPassword('password', '')
             ->setRequired('Zadejte heslo')
@@ -62,18 +62,19 @@ class SignUpForm extends BaseForm
         return $form;
     }
 
-    public function validateForm($form, $values)
-    {
-    }
-
     /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function processForm(Form $form, ArrayHash $values): void
     {
+        $userAccount = $this->userAccount;
+        $userAccount->setEmail($values->email);
+        $userAccount->setPassword($values->password);
+
+        $this->onSend($userAccount);
     }
 
-    /////////////////////////////////////////////// Private
+    /////////////////////////////////////////////// Utils
 
-    private function isEmailFreeToAssign(BaseControl $control): bool
+    public function isEmailFreeToAssign(BaseControl $control): bool
     {
         return $this->userAccountFacade->isEmailFreeToAssign($this->userAccount, $control->getValue());
     }

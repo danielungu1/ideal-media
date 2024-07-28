@@ -63,7 +63,8 @@
       <path value="$PROJECT_DIR$/vendor/nettrine/orm" />
       <path value="$PROJECT_DIR$/vendor/nettrine/cache" />
       <path value="$PROJECT_DIR$/vendor/nettrine/dbal" />
-      <path value="$PROJECT_DIR$/vendor/nextras/migrations" />
+      <path value="$PROJECT_DIR$/vendor/nettrine/fixtures" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

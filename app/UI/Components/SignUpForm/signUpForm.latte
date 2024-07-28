@@ -1,4 +1,9 @@
 <form n:name="form">
+    {foreach $form->errors as $error}
+        <div class="form-group">
+            {$error}
+        </div>
+    {/foreach}
     <div class="form-group">
         <label n:name="email">Email:</label>
         <input n:name="email">

@@ -28,7 +28,7 @@ abstract class BaseModel
     /** @ORM\Column(type="datetime") */
     protected DateTime $dateUpdated;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

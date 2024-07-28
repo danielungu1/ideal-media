@@ -3,4 +3,5 @@ services:
     - App\UI\Components\core\FormFactory
     - App\UI\Components\SignUpForm\SignUpFormFactory
 
-    - App\Facade\UserAccountFacade
+    - App\Model\Facade\UserAccountFacade
+    - App\Model\Service\UserAccountService

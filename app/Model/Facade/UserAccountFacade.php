@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Facade;
+namespace App\Model\Facade;
 
 use App\Model\UserAccount;
 use Nettrine\ORM\EntityManagerDecorator;

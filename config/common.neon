@@ -45,3 +45,8 @@ extensions:
 nettrine.orm.annotations:
     mapping:
         App\Model\: %appDir%/Model/
+
+nettrine.dbal:
+	connection:
+		types:
+		    datetime: App\Core\DateTimeType
