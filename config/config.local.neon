@@ -1,0 +1,10 @@
+nettrine.dbal:
+    debug:
+    	panel: true
+    connection:
+        host: 127.0.0.1
+        driver: mysqli
+        charset: utf8
+        user: root
+        password: root
+        dbname: ideal-media
