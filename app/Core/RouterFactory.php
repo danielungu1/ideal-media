@@ -16,6 +16,7 @@ final class RouterFactory
 	{
 		$router = new RouteList;
 		$router->addRoute('/', 'Home:default');
+		$router->addRoute('/prihlaseni', 'Home:signIn');
 		return $router;
 	}
 }

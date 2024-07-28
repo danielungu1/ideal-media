@@ -6,10 +6,13 @@ namespace App\UI\Home;
 
 use App\Model\Service\UserAccountService;
 use App\Model\UserAccount;
+use App\Services\User;
+use App\UI\Components\SignInForm\SignInForm;
+use App\UI\Components\SignInForm\SignInFormFactory;
 use App\UI\Components\SignUpForm\SignUpForm;
 use App\UI\Components\SignUpForm\SignUpFormFactory;
 use Nette\Application\UI\Presenter;
-use Nette\Security\User;
+use Nette\Utils\ArrayHash;
 
 final class HomePresenter extends Presenter
 {
@@ -17,10 +20,15 @@ final class HomePresenter extends Presenter
     public function __construct(
         private User $user,
         private SignUpFormFactory $signUpFormFactory,
+        private SignInFormFactory $signInFormFactory,
         private UserAccountService $userAccountService
     )
     {
         parent::__construct();
+    }
+
+    public function actionSignIn(): void
+    {
     }
 
     protected function createComponentSignUpForm(): SignUpForm
@@ -33,6 +41,17 @@ final class HomePresenter extends Presenter
             $this->flashMessage('Účet byl úspěšně vytvořen', 'success');
 
             $this->user->login($userAccount->getEmail(), $userAccount->getPassword());
+        };
+
+        return $form;
+    }
+
+    protected function createComponentSignInForm(): SignInForm
+    {
+        $form = $this->signInFormFactory->create();
+
+        $form->onSend[] = function (ArrayHash $values) {
+            $this->user->login($values->email, $values->password);
         };
 
         return $form;

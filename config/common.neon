@@ -20,7 +20,6 @@ latte:
 	extensions:
 		- App\UI\Accessory\LatteExtension
 
-
 di:
 	export:
 		parameters: no

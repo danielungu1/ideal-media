@@ -2,6 +2,18 @@ services:
     - App\Core\RouterFactory::createRouter
     - App\UI\Components\core\FormFactory
     - App\UI\Components\SignUpForm\SignUpFormFactory
-
+    - App\UI\Components\SignInForm\SignInFormFactory
     - App\Model\Facade\UserAccountFacade
     - App\Model\Service\UserAccountService
+
+    security.customAuthenticator:
+        class: App\Services\CustomAuthenticator
+
+    security.user:
+        class: App\Services\User
+        arguments:
+            - @security.customAuthenticator
+
+    latte.templateFactory:
+        factory: Nette\Bridges\ApplicationLatte\TemplateFactory
+
