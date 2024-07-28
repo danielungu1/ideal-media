@@ -5,7 +5,6 @@ namespace App\UI\Components\SignUpForm;
 use App\Model\UserAccount;
 use App\UI\Components\core\BaseForm;
 use App\UI\Components\core\FormFactory;
-use Nette\Application\UI\Template;
 use Nette\Forms\Form;
 use Nette\Utils\ArrayHash;
 
@@ -16,7 +15,6 @@ interface SignUpFormFactory
 
 }
 
-/** @property Template $template */
 class SignUpForm extends BaseForm
 {
 
@@ -35,31 +33,36 @@ class SignUpForm extends BaseForm
     {
         $form = $this->createForm();
 
-        $form->addEmail('email', 'front.email')
+        $form->addText('email', '')
             ->setHtmlAttribute('placeholder', '@')
-            ->setRequired()
-            ->addRule([$this, 'isEmailFreeToAssign'], 'front.emailAlreadyExists');
+            ->setRequired('Zadejte email')
+            ->addRule(Form::Email, 'Zadejte platný email')
+            ->addRule([$this, 'isEmailFreeToAssign'], '');
 
-        $form->addPassword('password', 'front.password')
-            ->setRequired()
-            ->addRule(Form::Pattern, 'front.passwordValidation', UserAccount::PASSWORD_REGEX);
+        $form->addPassword('password', '')
+            ->setRequired('Zadejte heslo')
+            ->addRule(
+                Form::Pattern,
+                'Heslo musí obsahovat alespoň 6 znaků, z toho jedno číslo a jedno velké písmeno',
+                UserAccount::PASSWORD_REGEX
+            );
 
-        $form->addPassword('passwordVerify', 'front.passwordVerify')
-            ->setRequired()
-            ->addRule(Form::Equal, 'front.passwordsDontMatch', $form['password']);
+        $form->addPassword('passwordVerify', '')
+            ->setRequired('Zadejte heslo znovu')
+            ->addRule(Form::Equal, 'Zadaná hesla nesouhlasí', $form['password']);
+
+        $form->addSubmit('submit', '');
 
         return $form;
     }
 
     public function validateForm($form, $values)
     {
-
     }
 
     /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function processForm(Form $form, ArrayHash $values): void
     {
-
     }
 
 }

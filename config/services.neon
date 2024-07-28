@@ -1,9 +1,4 @@
 services:
-	- App\Core\RouterFactory::createRouter
-
-
-search:
-	-	in: %appDir%
-		classes:
-			- *Factory
-			- *Facade
+    - App\Core\RouterFactory::createRouter
+    - App\UI\Components\core\FormFactory
+    - App\UI\Components\SignUpForm\SignUpFormFactory

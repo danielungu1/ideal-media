@@ -12,16 +12,24 @@ use Nette\Application\UI\Presenter;
 final class HomePresenter extends Presenter
 {
 
-    protected function createComponentSignUpForm(SignUpFormFactory $factory): SignUpForm
+    private SignUpFormFactory $signUpFormFactory;
+
+    public function __construct(SignUpFormFactory $signUpFormFactory)
     {
-        $form = $factory->create(new UserAccount);
+        parent::__construct();
+
+        $this->signUpFormFactory = $signUpFormFactory;
+    }
+
+    protected function createComponentSignUpForm(): SignUpForm
+    {
+        $form = $this->signUpFormFactory->create(new UserAccount);
 
         $form->onSend[] = function (
             UserAccount $userAccount,
             string $email,
             string $password,
         ) {
-
         };
 
         return $form;

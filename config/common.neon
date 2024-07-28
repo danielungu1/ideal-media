@@ -25,3 +25,6 @@ di:
 	export:
 		parameters: no
 		tags: no
+
+includes:
+    - services.neon
