@@ -8,7 +8,12 @@ use Nette\Utils\DateTime;
 abstract class BaseModel
 {
 
-    public abstract function getId(): ?string;
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
 
     public function __construct()
     {
@@ -22,6 +27,11 @@ abstract class BaseModel
 
     /** @ORM\Column(type="datetime") */
     protected DateTime $dateUpdated;
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
     public function getDateUpdated(): DateTime
     {
@@ -42,5 +52,5 @@ abstract class BaseModel
     {
         $this->dateCreated = $dateCreated;
     }
-    
+
 }

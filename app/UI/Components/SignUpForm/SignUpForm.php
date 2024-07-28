@@ -2,9 +2,11 @@
 
 namespace App\UI\Components\SignUpForm;
 
+use App\Facade\UserAccountFacade;
 use App\Model\UserAccount;
 use App\UI\Components\core\BaseForm;
 use App\UI\Components\core\FormFactory;
+use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Form;
 use Nette\Utils\ArrayHash;
 
@@ -18,7 +20,11 @@ interface SignUpFormFactory
 class SignUpForm extends BaseForm
 {
 
-    public function __construct(FormFactory $formFactory, private UserAccount $userAccount)
+    public function __construct(
+        FormFactory $formFactory,
+        private UserAccount $userAccount,
+        private UserAccountFacade $userAccountFacade
+    )
     {
         parent::__construct($formFactory);
     }
@@ -63,6 +69,13 @@ class SignUpForm extends BaseForm
     /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function processForm(Form $form, ArrayHash $values): void
     {
+    }
+
+    /////////////////////////////////////////////// Private
+
+    private function isEmailFreeToAssign(BaseControl $control): bool
+    {
+        return $this->userAccountFacade->isEmailFreeToAssign($this->userAccount, $control->getValue());
     }
 
 }
