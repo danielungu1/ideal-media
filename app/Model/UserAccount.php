@@ -11,6 +11,9 @@ use Nette\Security\Passwords;
 class UserAccount extends BaseModel
 {
 
+    // First character uppercase, at least one digit, at least six characters long
+    public const PASSWORD_REGEX = '^[A-Z](?=.*\d)[A-Za-z\d]{5,}$';
+
     /** @ORM\Id */
     private ?string $id = null;
 
