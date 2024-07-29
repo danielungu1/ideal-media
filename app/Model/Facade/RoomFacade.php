@@ -13,4 +13,14 @@ final class RoomFacade extends BaseFacade
         parent::__construct($em, Room::class);
     }
 
+    public function getAvailableRoom()
+    {
+        return $this->getQueryBuilder()
+            ->leftJoin('e.roomAvailabilities', 'r')
+            ->leftJoin('r.roomReservations', 'rr')
+            ->where('rr.roomAvailability IS NULL')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

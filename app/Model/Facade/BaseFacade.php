@@ -3,6 +3,7 @@
 namespace App\Model\Facade;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ObjectRepository;
 
 abstract class BaseFacade
@@ -35,6 +36,20 @@ abstract class BaseFacade
     public function findBy(array $criteria, array $order = null, int $limit = null, int $offset = null): array
     {
         return $this->repository->findBy($criteria, $order, $limit, $offset);
+    }
+
+    public function createQueryBuilder(): QueryBuilder
+    {
+        return $this->em->createQueryBuilder();
+    }
+
+    public function getQueryBuilder(string $alias = 'e'): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder();
+        $qb->select($alias);
+        $qb->from($this->repository->getClassName(), $alias);
+
+        return $qb;
     }
 
 }

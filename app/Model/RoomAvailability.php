@@ -16,6 +16,9 @@ class RoomAvailability extends BaseModel
      */
     protected Room $room;
 
+    /** @ORM\OneToMany(targetEntity="RoomReservation", mappedBy="roomAvailability", cascade={"persist"}) */
+    protected $roomReservations;
+
     /** @ORM\Column(type="datetime") */
     protected $availableSince;
 
@@ -52,6 +55,16 @@ class RoomAvailability extends BaseModel
     public function setAvailableTill($availableTill): void
     {
         $this->availableTill = $availableTill;
+    }
+
+    public function getRoomReservations()
+    {
+        return $this->roomReservations;
+    }
+
+    public function setRoomReservations($roomReservations): void
+    {
+        $this->roomReservations = $roomReservations;
     }
 
 }

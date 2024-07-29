@@ -50,7 +50,7 @@ final class RoomPresenter extends Presenter
 
     public function actionDefault(): void
     {
-        $this->template->rooms = $this->roomFacade->findAll();
+        $this->template->rooms = $this->roomFacade->getAvailableRoom();
     }
 
     public function actionMyReservations(): void
@@ -58,6 +58,16 @@ final class RoomPresenter extends Presenter
         $this->template->reservations = $this->roomReservationFacade->findBy([
             'userAccount' => (string) $this->getUser()->getId()
         ]);
+    }
+
+    public function actionReservation(string $id): void
+    {
+        if (!$room = $this->roomFacade->find($id)) {
+            $this->flashMessage('Místnost nebyla nalezena');
+            $this->redirect('Room:default');
+        }
+
+        $this->template->room = $this->room = $room;
     }
 
     public function actionDeleteReservation(string $id): void
@@ -70,16 +80,6 @@ final class RoomPresenter extends Presenter
         $this->roomReservationService->delete($reservation);
         $this->flashMessage('Rezervace byla smazána');
         $this->redirect('Room:myReservations');
-    }
-
-    public function actionReservation(string $id): void
-    {
-        if (!$room = $this->roomFacade->find($id)) {
-            $this->flashMessage('Místnost nebyla nalezena');
-            $this->redirect('Room:default');
-        }
-
-        $this->template->room = $this->room = $room;
     }
 
     public function actionOut(): void
