@@ -68,7 +68,7 @@ class SignUpForm extends BaseForm
         $userAccount->setEmail($values->email);
         $userAccount->setPassword($values->password);
 
-        $this->onSend($userAccount);
+        $this->onSend($userAccount, $values);
     }
 
     /////////////////////////////////////////////// Utils

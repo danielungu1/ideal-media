@@ -87,7 +87,7 @@ final class RoomPresenter extends Presenter
     public function actionOut(): void
     {
         $this->getUser()->logout(true);
-        $this->redirect('Home:');
+        $this->redirect('Home:signIn');
     }
 
     protected function createComponentReservationForm(): ReservationForm

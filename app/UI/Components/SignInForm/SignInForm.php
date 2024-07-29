@@ -27,12 +27,10 @@ class SignInForm extends BaseForm
         $form = $this->createForm();
 
         $form->addText('email', '')
-            ->setRequired();
+            ->setRequired('Zadejte email');
 
         $form->addPassword('password', '')
-            ->setRequired();
-
-        $form->addCheckbox('remember', '');
+            ->setRequired('Zadejte heslo');
 
         $form->addSubmit('submit', '');
 

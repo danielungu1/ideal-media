@@ -44,12 +44,12 @@ final class HomePresenter extends Presenter
     {
         $form = $this->signUpFormFactory->create(new UserAccount);
 
-        $form->onSend[] = function (UserAccount $userAccount) {
+        $form->onSend[] = function (UserAccount $userAccount, ArrayHash $values) {
             $this->userAccountService->save($userAccount);
 
             $this->flashMessage('Účet byl úspěšně vytvořen', 'success');
 
-            $this->user->login($userAccount->getEmail(), $userAccount->getPassword());
+            $this->user->login($userAccount->getEmail(), $values->password);
 
             $this->redirect('Room:default');
         };

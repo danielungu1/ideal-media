@@ -15,6 +15,7 @@ class CustomAuthenticator implements Authenticator
 
     public function __construct(
         private UserAccountFacade $userAccountFacade,
+        private Passwords $passwords,
     )
     {
     }
@@ -26,10 +27,12 @@ class CustomAuthenticator implements Authenticator
         $userAccount = $this->userAccountFacade->findOneBy(['email' => $user]);
 
         if (!$userAccount) {
-            throw new AuthenticationException('Špatný e-mail nebo heslo', self::IdentityNotFound);
+            throw new AuthenticationException('Nesprávný e-mail nebo heslo', self::IdentityNotFound);
+        } elseif (!$this->passwords->verify($password, $userAccount->getPassword())) {
+            throw new AuthenticationException('Nesprávný e-mail nebo heslo', self::InvalidCredential);
         }
 
-        return new SimpleIdentity($userAccount->getId(), [$userAccount->getEmail()]);
+        return new SimpleIdentity($userAccount->getId(), [$userAccount->getEmail(), $password]);
     }
 
 }
