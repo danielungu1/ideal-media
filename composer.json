@@ -20,7 +20,9 @@
 		"latte/latte": "^3.0",
 		"tracy/tracy": "^2.10",
 		"nettrine/orm": "^0.8.4",
-		"nettrine/fixtures": "^0.7.2"
+		"nettrine/fixtures": "^0.7.2",
+		"nextras/migrations": "^3.3",
+		"contributte/console": "^0.10.1"
 	},
 	"require-dev": {
 		"nette/tester": "^2.5",

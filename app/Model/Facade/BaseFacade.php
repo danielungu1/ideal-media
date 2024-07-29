@@ -17,6 +17,11 @@ abstract class BaseFacade
 
     //////////////////////////////////////////////////////// Public
 
+    public function findAll(): array
+    {
+        return $this->repository->findAll();
+    }
+
     public function find(string $id = null): ?object
     {
         return $id ? $this->repository->find($id) : null;

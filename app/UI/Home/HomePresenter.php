@@ -27,8 +27,13 @@ final class HomePresenter extends Presenter
         parent::__construct();
     }
 
-    public function actionSignIn(): void
+    public function startup()
     {
+        parent::startup();
+
+        if ($this->user->isLoggedIn()) {
+            $this->redirect('Room:default');
+        }
     }
 
     protected function createComponentSignUpForm(): SignUpForm

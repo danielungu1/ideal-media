@@ -13,8 +13,6 @@ final class UserAccountFacade extends BaseFacade
         parent::__construct($em, UserAccount::class);
     }
 
-    //////////////////////////////////////////////////////// Public
-
     public function isEmailFreeToAssign(UserAccount $user, string $email): bool
     {
         if ($user->getId() && $user->getEmail() === $email) {

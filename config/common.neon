@@ -41,6 +41,9 @@ extensions:
     nettrine.orm.console: Nettrine\ORM\DI\OrmConsoleExtension
     nettrine.orm.annotations: Nettrine\ORM\DI\OrmAnnotationsExtension
 
+    migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
+    contributte.console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+
 nettrine.orm.annotations:
     mapping:
         App\Model\: %appDir%/Model/
@@ -49,3 +52,8 @@ nettrine.dbal:
 	connection:
 		types:
 		    datetime: App\Core\DateTimeType
+
+migrations:
+    dir: %appDir%/../migrations
+    driver: mysql
+    dbal: doctrine

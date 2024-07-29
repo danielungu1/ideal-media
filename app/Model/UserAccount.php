@@ -20,6 +20,9 @@ class UserAccount extends BaseModel
     /** @ORM\Column(type="string") */
     protected string $password;
 
+    /** @ORM\OneToMany(targetEntity="RoomReservation", mappedBy="userAccount", cascade={"persist"}) */
+    protected $roomReservations;
+
     //////////////////////////////////////////////////////// Getters & Setters
 
     public function getEmail(): string
@@ -40,6 +43,16 @@ class UserAccount extends BaseModel
     public function setPassword(string $password): void
     {
         $this->password = (new Passwords)->hash($password);
+    }
+
+    public function getRoomReservations()
+    {
+        return $this->roomReservations;
+    }
+
+    public function setRoomReservations($roomReservations): void
+    {
+        $this->roomReservations = $roomReservations;
     }
 
 }

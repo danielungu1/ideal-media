@@ -3,7 +3,10 @@ services:
     - App\UI\Components\core\FormFactory
     - App\UI\Components\SignUpForm\SignUpFormFactory
     - App\UI\Components\SignInForm\SignInFormFactory
+
     - App\Model\Facade\UserAccountFacade
+    - App\Model\Facade\RoomFacade
+
     - App\Model\Service\UserAccountService
 
     security.customAuthenticator:

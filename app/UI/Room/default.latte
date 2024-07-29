@@ -1,0 +1,26 @@
+{block content}
+
+<div class="container">
+    <div class="navbar">
+        {foreach $navbarItems as $title => $link}
+            <a n:href="{$link}">{$title}</a>
+        {/foreach}
+    </div>
+
+    <h2>Místnosti</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Název místnosti</th>
+            <th>Akce</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr n:foreach="$rooms as $room">
+            <td>{$room->getName()}</td>
+            <td><a n:href="Room:makeReservation $room->getId()">Rezervovat</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
