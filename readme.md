@@ -1,52 +1,24 @@
-Nette Web Project
-=================
-
-Welcome to the Nette Web Project! This is a basic skeleton application built using
-[Nette](https://nette.org), ideal for kick-starting your new web projects.
-
-Nette is a renowned PHP web development framework, celebrated for its user-friendliness,
-robust security, and outstanding performance. It's among the safest choices
-for PHP frameworks out there.
-
-If Nette helps you, consider supporting it by [making a donation](https://nette.org/donate).
-Thank you for your generosity!
-
-
-Requirements
+Instalace
 ------------
 
-This Web Project is compatible with Nette 3.2 and requires PHP 8.1.
+1) Aplikace běží na PHP 8.2
+2) Pomocí composer 2 nainstalujte balíčky `composer install`
+3) V config.local.neon si nastavte připojení k databázi
 
-
-Installation
+Migrace
 ------------
+`php bin/console migrations:reset` načte všechna data do databáze
 
-To install the Web Project, Composer is the recommended tool. If you're new to Composer,
-follow [these instructions](https://doc.nette.org/composer). Then, run:
+Dodatečné informace
+------------
+Snažil jsem se toho udělat co nejvíce nad rámec a určitě by toho šlo udělat mnohen více. Zároveň jsem se to ale snažil 
+udělat co nejvíce časově úsporné, takže jsem musel zvolit kompromis a některé věci (nad rámec) nedělat. Určitě by
+šla vylepšit struktura složek, stylování (někde jsem stylování vynechal, abych ušetřil čas), šly by přidat překlady, aby
+byla aplikace vícejazyčná a texty by byly odděleny od kódu. 
 
-	composer create-project nette/web-project path/to/install
-	cd path/to/install
-
-Ensure the `temp/` and `log/` directories are writable.
-
-
-Web Server Setup
-----------------
-
-To quickly dive in, use PHP's built-in server:
-
-	php -S localhost:8000 -t www
-
-Then, open `http://localhost:8000` in your browser to view the welcome page.
-
-For Apache or Nginx users, configure a virtual host pointing to your project's `www/` directory.
-
-**Important Note:** Ensure `app/`, `config/`, `log/`, and `temp/` directories are not web-accessible.
-Refer to [security warning](https://nette.org/security-warning) for more details.
-
-
-Minimal Skeleton
-----------------
-
-For demonstrating issues or similar tasks, rather than starting a new project, use
-this [minimal skeleton](https://github.com/nette/web-project/tree/minimal).
+Jako ORM jsem zvolil Nettrine, protože s ním mám již zkušenosti. Zakomponoval jsem i migrace, aby byla práce s daty co
+nejpříjemnější. Pro práci s daty v aplikaci využívám QueryBuilder, který je velmi dostačující, a zároveň jednoduchý 
+na použití, a Service na ukládání/mazání. To všechno běží na EntityManagerInterface, což je součástí ORM. Strukturu dat
+jsem moc neměnil. Použil jsem základní skeleton, který se navrhuje při instalaci Nette a do toho jsem si zakomponoval
+několik svých složek. Komponenty jsem psal tak, jak jsem zvyklý - je to za mě přehledné a jednoduché. Dbal jsem i na 
+čistotu kódu.
