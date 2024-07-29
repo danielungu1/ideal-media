@@ -20,7 +20,7 @@ class RoomReservation extends BaseModel
      * @ORM\ManyToOne(targetEntity="RoomAvailability")
      * @ORM\JoinColumn(name="room_availability_id", referencedColumnName="id", nullable=false)
      */
-    protected RoomAvailability $room;
+    protected RoomAvailability $roomAvailability;
 
     //////////////////////////////////////////////////////// Getters & Setters
 
@@ -34,14 +34,14 @@ class RoomReservation extends BaseModel
         $this->userAccount = $userAccount;
     }
 
-    public function getRoom(): RoomAvailability
+    public function getRoomAvailability(): RoomAvailability
     {
-        return $this->room;
+        return $this->roomAvailability;
     }
 
-    public function setRoom(RoomAvailability $room): void
+    public function setRoomAvailability(RoomAvailability $roomAvailability): void
     {
-        $this->room = $room;
+        $this->roomAvailability = $roomAvailability;
     }
 
 }

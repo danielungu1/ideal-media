@@ -32,4 +32,9 @@ abstract class BaseFacade
         return $this->repository->findOneBy($criteria);
     }
 
+    public function findBy(array $criteria, array $order = null, int $limit = null, int $offset = null): array
+    {
+        return $this->repository->findBy($criteria, $order, $limit, $offset);
+    }
+
 }

@@ -18,8 +18,9 @@ final class RouterFactory
 		$router->addRoute('/', 'Home:default');
 		$router->addRoute('/prihlaseni', 'Home:signIn');
 		$router->addRoute('/konferencni-mistnosti', 'Room:default');
-		$router->addRoute('/konferencni-mistnosti/rezervovat/<id>', 'Room:makeReservation');
+		$router->addRoute('/konferencni-mistnosti/rezervovat/<id>', 'Room:reservation');
 		$router->addRoute('/konferencni-mistnosti/me-rezervace', 'Room:myReservations');
+        $router->addRoute('/konferencni-mistnosti/smazat-rezervaci/<id>', 'Room:deleteReservation');
         $router->addRoute('/odhlasit-se', 'Room:out');
 
 		return $router;

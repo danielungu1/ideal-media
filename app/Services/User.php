@@ -25,7 +25,7 @@ class User extends Nette\Security\User
         try {
             parent::login($user, $password);
         } catch (\Exception $e) {
-            throw new AuthenticationException($e->getMessage(), $e->getCode(), $e);
+            throw new AuthenticationException($e->getMessage());
         }
     }
 

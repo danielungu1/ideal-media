@@ -1,0 +1,14 @@
+<form n:name="form">
+    <div n:foreach="$availabilities as $availability" class="form-group">
+        <label>
+            <input n:name="$form[availability][$availability->getId()]">
+            {$availability->getAvailableSince()->format('d.m.Y H:i')} - {$availability->getAvailableTill()->format('d.m.Y H:i')}
+        </label>
+    </div>
+
+    <button n:name="submit">Rezervovat</button>
+
+    <div class="form-group">
+        <a href="{plink :Room:default}">Zpět</a>
+    </div>
+</form>

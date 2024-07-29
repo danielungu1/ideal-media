@@ -13,8 +13,8 @@ class Room extends BaseModel
     /** @ORM\Column(type="string") */
     protected string $name;
 
-    /** @ORM\OneToMany(targetEntity="RoomReservation", mappedBy="room", cascade={"persist"}) */
-    protected $roomReservations;
+    /** @ORM\OneToMany(targetEntity="RoomAvailability", mappedBy="room", cascade={"persist"}) */
+    protected $roomAvailabilities;
 
     //////////////////////////////////////////////////////// Getters & Setters
 
@@ -28,14 +28,14 @@ class Room extends BaseModel
         $this->name = $name;
     }
 
-    public function getRoomReservations()
+    public function getAvailabilities()
     {
-        return $this->roomReservations;
+        return $this->roomAvailabilities;
     }
 
-    public function setRoomReservations($roomReservations): void
+    public function setAvailabilities($roomAvailabilities): void
     {
-        $this->roomReservations = $roomReservations;
+        $this->roomAvailabilities = $roomAvailabilities;
     }
 
 }

@@ -7,7 +7,7 @@
         {/foreach}
     </div>
 
-    <h2>Místnosti</h2>
+    <h2>Konferenční místnosti</h2>
 
     <table>
         <thead>
@@ -19,7 +19,7 @@
         <tbody>
         <tr n:foreach="$rooms as $room">
             <td>{$room->getName()}</td>
-            <td><a n:href="Room:makeReservation $room->getId()">Rezervovat</a></td>
+            <td><a n:href="Room:reservation $room->getId()">Rezervovat</a></td>
         </tr>
         </tbody>
     </table>

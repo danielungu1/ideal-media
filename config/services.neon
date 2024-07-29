@@ -3,11 +3,15 @@ services:
     - App\UI\Components\core\FormFactory
     - App\UI\Components\SignUpForm\SignUpFormFactory
     - App\UI\Components\SignInForm\SignInFormFactory
+    - App\UI\Components\ReservationForm\ReservationFormFactory
 
     - App\Model\Facade\UserAccountFacade
     - App\Model\Facade\RoomFacade
+    - App\Model\Facade\RoomAvailabilityFacade
+    - App\Model\Facade\RoomReservationFacade
 
     - App\Model\Service\UserAccountService
+    - App\Model\Service\RoomReservationService
 
     security.customAuthenticator:
         class: App\Services\CustomAuthenticator

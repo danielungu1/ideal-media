@@ -1,0 +1,31 @@
+{block content}
+
+<div class="container">
+    <div class="navbar">
+        {foreach $navbarItems as $title => $link}
+            <a n:href="{$link}">{$title}</a>
+        {/foreach}
+    </div>
+
+    <h2>Mé rezervace</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Název místnosti</th>
+            <th>Čas</th>
+            <th>Akce</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr n:foreach="$reservations as $reservation">
+            {var $availability = $reservation->getRoomAvailability()}
+            {var $room = $availability->getRoom()}
+
+            <td>{$room->getName()}</td>
+            <td>{$availability->getAvailableSince()->format('d.m.Y H:i')} - {$availability->getAvailableTill()->format('d.m.Y H:i')}</td>
+            <td><a n:href="Room:deleteReservation $reservation->getId()">Zrušit rezervaci</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

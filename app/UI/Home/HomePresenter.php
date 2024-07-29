@@ -47,6 +47,8 @@ final class HomePresenter extends Presenter
             $this->flashMessage('Účet byl úspěšně vytvořen', 'success');
 
             $this->user->login($userAccount->getEmail(), $userAccount->getPassword());
+
+            $this->redirect('Room:default');
         };
 
         return $form;
@@ -59,6 +61,7 @@ final class HomePresenter extends Presenter
         $form->onSend[] = function (ArrayHash $values) {
             try {
                 $this->user->login($values->email, $values->password);
+                $this->redirect('Room:default');
             } catch (AuthenticationException $e) {
                 $this->flashMessage($e->getMessage(), 'danger');
             }
