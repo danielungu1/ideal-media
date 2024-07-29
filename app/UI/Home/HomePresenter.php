@@ -12,21 +12,24 @@ use App\UI\Components\SignInForm\SignInFormFactory;
 use App\UI\Components\SignUpForm\SignUpForm;
 use App\UI\Components\SignUpForm\SignUpFormFactory;
 use Nette\Application\UI\Presenter;
+use Nette\DI\Attributes\Inject;
 use Nette\Security\AuthenticationException;
 use Nette\Utils\ArrayHash;
 
 final class HomePresenter extends Presenter
 {
 
-    public function __construct(
-        private User $user,
-        private SignUpFormFactory $signUpFormFactory,
-        private SignInFormFactory $signInFormFactory,
-        private UserAccountService $userAccountService
-    )
-    {
-        parent::__construct();
-    }
+    #[Inject]
+    public User $user;
+
+    #[Inject]
+    public SignUpFormFactory $signUpFormFactory;
+
+    #[Inject]
+    public SignInFormFactory $signInFormFactory;
+
+    #[Inject]
+    public UserAccountService $userAccountService;
 
     public function startup()
     {

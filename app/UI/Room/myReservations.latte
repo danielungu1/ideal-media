@@ -13,7 +13,7 @@
         <thead>
         <tr>
             <th>Název místnosti</th>
-            <th>Čas</th>
+            <th>Datum a čas</th>
             <th>Akce</th>
         </tr>
         </thead>
@@ -28,4 +28,8 @@
         </tr>
         </tbody>
     </table>
+
+    {if !$reservations}
+        Aktuálně nemáte žádné rezervace
+    {/if}
 </div>

@@ -1,4 +1,10 @@
 <form n:name="form">
+    {foreach $form->errors as $error}
+        <div class="form-group">
+            {$error}
+        </div>
+    {/foreach}
+
     <div n:foreach="$availabilities as $availability" class="form-group">
         <label>
             <input n:name="$form[availability][$availability->getId()]">
@@ -8,7 +14,5 @@
 
     <button n:name="submit">Rezervovat</button>
 
-    <div class="form-group">
-        <a href="{plink :Room:default}">Zpět</a>
-    </div>
+    <a href="{plink :Room:default}">Zpět</a>
 </form>

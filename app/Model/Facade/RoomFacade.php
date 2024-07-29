@@ -13,7 +13,7 @@ final class RoomFacade extends BaseFacade
         parent::__construct($em, Room::class);
     }
 
-    public function getAvailableRoom()
+    public function getAvailableRooms()
     {
         return $this->getQueryBuilder()
             ->leftJoin('e.roomAvailabilities', 'r')
@@ -21,6 +21,20 @@ final class RoomFacade extends BaseFacade
             ->where('rr.roomAvailability IS NULL')
             ->getQuery()
             ->getResult();
+    }
+
+    public function isRoomAvailable(Room $room): bool
+    {
+        $roomAvailability = $this->getQueryBuilder()
+            ->leftJoin('e.roomAvailabilities', 'ra')
+            ->leftJoin('ra.roomReservations', 'rr')
+            ->andWhere('rr.roomAvailability IS NULL')
+            ->andWhere('e = :room')
+            ->setParameter('room', $room)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return (bool)$roomAvailability;
     }
 
 }

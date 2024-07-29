@@ -55,7 +55,22 @@ class ReservationForm extends BaseForm
         return $form;
     }
 
-    /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
+    public function validateForm(Form $form, ArrayHash $values): void
+    {
+        $selected = false;
+
+        foreach ($values->availability as $selected) {
+            if ($selected) {
+                $selected = true;
+                break;
+            }
+        }
+
+        if (!$selected) {
+            $form->addError('Vyberte alespoň jeden termín');
+        }
+    }
+
     public function processForm(Form $form, ArrayHash $values): void
     {
         foreach ($values->availability as $availabilityId => $selected) {

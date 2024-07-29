@@ -13,7 +13,6 @@ use App\UI\Components\ReservationForm\ReservationForm;
 use App\UI\Components\ReservationForm\ReservationFormFactory;
 use Nette\Application\UI\Presenter;
 use Nette\DI\Attributes\Inject;
-use Nette\Utils\ArrayHash;
 
 final class RoomPresenter extends Presenter
 {
@@ -50,7 +49,7 @@ final class RoomPresenter extends Presenter
 
     public function actionDefault(): void
     {
-        $this->template->rooms = $this->roomFacade->getAvailableRoom();
+        $this->template->rooms = $this->roomFacade->getAvailableRooms();
     }
 
     public function actionMyReservations(): void
@@ -62,7 +61,9 @@ final class RoomPresenter extends Presenter
 
     public function actionReservation(string $id): void
     {
-        if (!$room = $this->roomFacade->find($id)) {
+        $room = $this->roomFacade->find($id);
+
+        if (!$room || !$this->roomFacade->isRoomAvailable($room)) {
             $this->flashMessage('Místnost nebyla nalezena');
             $this->redirect('Room:default');
         }
@@ -78,6 +79,7 @@ final class RoomPresenter extends Presenter
         }
 
         $this->roomReservationService->delete($reservation);
+
         $this->flashMessage('Rezervace byla smazána');
         $this->redirect('Room:myReservations');
     }

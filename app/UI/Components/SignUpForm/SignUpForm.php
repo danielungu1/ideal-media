@@ -62,7 +62,6 @@ class SignUpForm extends BaseForm
         return $form;
     }
 
-    /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function processForm(Form $form, ArrayHash $values): void
     {
         $userAccount = $this->userAccount;

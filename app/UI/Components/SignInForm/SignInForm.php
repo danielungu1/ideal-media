@@ -39,7 +39,6 @@ class SignInForm extends BaseForm
         return $form;
     }
 
-    /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function processForm(Form $form, ArrayHash $values): void
     {
         $this->onSend($values);
