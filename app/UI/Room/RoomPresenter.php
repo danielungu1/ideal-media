@@ -93,7 +93,9 @@ final class RoomPresenter extends Presenter
         $userAccount = $this->userAccountFacade->find((string) $this->getUser()->getId());
         $form = $this->reservationFormFactory->create($this->room, $userAccount);
 
-        $form->onSend[] = function (ArrayHash $values) {
+        $form->onSend[] = function () {
+            $this->flashMessage('Akce proběhla úspěšně');
+            $this->redirect('Room:myReservations');
         };
 
         return $form;

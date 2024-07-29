@@ -35,7 +35,7 @@ class ReservationForm extends BaseForm
 
     public function render(): void
     {
-        $this->template->availabilities = $this->room->getAvailabilities();
+        $this->template->availabilities = $this->roomAvailabilityFacade->findAvailableTimesByRoom($this->room);
         $this->template->setFile(__DIR__ . '/reservationForm.latte');
         $this->template->render();
     }
@@ -46,7 +46,7 @@ class ReservationForm extends BaseForm
 
         $container = $form->addContainer('availability');
 
-        foreach ($this->room->getAvailabilities() as $availability) {
+        foreach ($this->roomAvailabilityFacade->findAvailableTimesByRoom($this->room) as $availability) {
             $container->addCheckbox($availability->getId(), '');
         }
 

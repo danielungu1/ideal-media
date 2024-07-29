@@ -1,6 +1,12 @@
 {block content}
 
 <div class="container">
+    <div class="navbar">
+        {foreach $navbarItems as $title => $link}
+            <a n:href="{$link}">{$title}</a>
+        {/foreach}
+    </div>
+
     <h2>Rezervovat místnost {$room->getName()}</h2>
 
     {control reservationForm}
