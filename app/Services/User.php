@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Nette;
+use Nette\Security\AuthenticationException;
 use Nette\Security\UserStorage;
 
 class User extends Nette\Security\User
@@ -18,5 +19,15 @@ class User extends Nette\Security\User
             authenticator: $customAuthenticator
         );
     }
+
+    public function login($user, string $password = null): void
+    {
+        try {
+            parent::login($user, $password);
+        } catch (\Exception $e) {
+            throw new AuthenticationException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
 
 }

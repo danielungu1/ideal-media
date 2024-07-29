@@ -12,6 +12,7 @@ use App\UI\Components\SignInForm\SignInFormFactory;
 use App\UI\Components\SignUpForm\SignUpForm;
 use App\UI\Components\SignUpForm\SignUpFormFactory;
 use Nette\Application\UI\Presenter;
+use Nette\Security\AuthenticationException;
 use Nette\Utils\ArrayHash;
 
 final class HomePresenter extends Presenter
@@ -56,7 +57,11 @@ final class HomePresenter extends Presenter
         $form = $this->signInFormFactory->create();
 
         $form->onSend[] = function (ArrayHash $values) {
-            $this->user->login($values->email, $values->password);
+            try {
+                $this->user->login($values->email, $values->password);
+            } catch (AuthenticationException $e) {
+                $this->flashMessage($e->getMessage(), 'danger');
+            }
         };
 
         return $form;

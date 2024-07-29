@@ -27,9 +27,9 @@ class CustomAuthenticator implements Authenticator
         $userAccount = $this->userAccountFacade->findOneBy(['email' => $user]);
 
         if (!$userAccount) {
-            throw new AuthenticationException('front.wrongCredentials', self::IdentityNotFound);
+            throw new AuthenticationException('Špatný e-mail nebo heslo', self::IdentityNotFound);
         } elseif (!$this->passwords->verify($password, $userAccount->getPassword())) {
-            throw new AuthenticationException('front.wrongCredentials', self::InvalidCredential);
+            throw new AuthenticationException('Špatný e-mail nebo heslo', self::InvalidCredential);
         }
 
         return new SimpleIdentity($userAccount->getId(), [$userAccount->getEmail()]);
