@@ -15,7 +15,9 @@ Dodatečné informace
 Snažil jsem se toho udělat co nejvíce nad rámec a určitě by toho šlo udělat mnohen více. Zároveň jsem se to ale snažil 
 udělat co nejvíce časově úsporné, takže jsem musel zvolit kompromis a některé věci (nad rámec) nedělat. Určitě by
 šla vylepšit struktura složek, stylování (někde jsem stylování vynechal, abych ušetřil čas), šly by přidat překlady, aby
-byla aplikace vícejazyčná a texty by byly odděleny od kódu, nebo třeba confirm při rušení rezervace. 
+byla aplikace vícejazyčná a texty by byly odděleny od kódu, nebo třeba confirm při rušení rezervace. Ještě mě napadá,
+že by šel vytvořit nějaký BasePresenter, ze kterého by dědily ostatní Presentery. Ale to bych tady mohl 
+psát do nekonečna, co včechno by šlo :).
 
 Jako ORM jsem zvolil Nettrine, protože s ním mám již zkušenosti. Zakomponoval jsem i migrace, aby byla práce s daty co
 nejpříjemnější. Pro práci s daty v aplikaci využívám QueryBuilder, který je velmi dostačující, a zároveň jednoduchý 
